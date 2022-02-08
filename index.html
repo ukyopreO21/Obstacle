@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vượt Chướng Ngại Vật</title>
+    <link rel="shortcut icon" type="image/jpg" href="icon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+    <video style="text-align: center" id="myVideo" width="1920" height="900" controls="controls">
+        <source src="superidol.mp4" type="video/mp4">
+        <source src="superidol.ogg" type="video/ogg">
+      </video>
+</head>
+<body>
+    <p id="status" class="noselect"></p>
+    <p id="timeQ" class="noselect"></p>
+    <p id="sokitu" class="noselect"></p>
+    <p id="question" class="noselect">Ấn vào nút START để bắt đầu</p>
+    <div id="bottom1" class="main1 noselect">
+        <input id="textboxid" autocomplete="off" class="noselect" placeholder="Nhập vào đây lè :>">
+    </div>
+    <div id="bottom2" class="main2 noselect">
+        <div class="center noselect">
+            <label id="saveAns" class="noselect" style="font-size: 15px"></label>
+        </div>
+    </div>
+    <div id="bottom3" class="noselect">
+        <button id="test" class="button button1 noselect" onclick="ansObs()">TRẢ LỜI CNV</button>
+    </div>
+</body>
+    <div>
+        <button id="button" class="button button2 noselect" onclick="start()">START</button>
+    </div>
+    <div align="center" class="mainGUI noselect">
+        <label id="CNV" class="noselect"></label>
+        <button style="visibility: hidden" class="noselect"></button>
+        <br><br>
+        <div id="hangngang1" class="noselect">
+            <label id="HN1">HÀNG NGANG 1</label>
+            <button id="ques1" class="noselect" onclick="ques(this)" name="1">1</button>
+            <br><br>
+        </div>
+        <div id="hangngang2" class="noselect">
+            <label id="HN2">HÀNG NGANG 2</label>
+            <button id="ques2" class="noselect" onclick="ques(this)" name="2">2</button>
+            <br><br>
+        </div>
+        <div id="hangngang3" class="noselect">
+            <label id="HN3">HÀNG NGANG 3</label>
+            <button id="ques3" class="noselect" onclick="ques(this)" name="3">3</button>
+            <br><br>
+        </div>
+        <div id="hangngang4" class="noselect">
+            <label id="HN4">HÀNG NGANG 4</label>
+            <button id="ques4" class="noselect" onclick="ques(this)" name="4">4</button>
+            <br><br>
+        </div>
+    </div>
+    <img id="pic" class="noselect" src="CNV.png" width="498" height="498" style="border: 1px solid green; z-index:-1;"></img>
+    <div id="puz" class="noselect">
+    <svg height="500" width="500" class="noselect">
+        <polygon id="goc1" class="noselect" points="0,0 250,0 250,125 125,125 125,250 0,250" style="fill:grey;stroke:green;stroke-width:2px;"></polygon>
+        <polygon id="goc2" class="noselect" points="250,0 250,125 375,125 375,250 500,250, 500,0" style="fill:grey;stroke:green;stroke-width:2px;"></polygon>
+        <polygon id="goc4" class="noselect" points="0,250 0,500 250,500 250,375 125,375 125,250" style="fill:grey;stroke:green;stroke-width:2px;"></polygon>
+        <polygon id="goc3" class="noselect" points="500,250 500,500 250,500 250,375 375,375 375,250" style="fill:grey;stroke:green;stroke-width:2px;"></polygon>
+        <polygon id="goc5" class="noselect" points="125,125 375,125 375,375 125,375" style="fill:grey;stroke:green;stroke-width:2px;"></polygon>
+    </svg>
+    </div>
+<script src="code.js"></script>
+</html>
