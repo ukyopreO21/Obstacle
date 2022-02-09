@@ -35,6 +35,12 @@
     var hn = ["1","1","1","1"];
     var check = ["0","0","0","0"];
     var checkCNV = 0;
+    var checkBtn = 0;
+    var index = "";
+    var sothutu = "";
+    var HN = "";
+    var hangngang = "";
+    var goc = "";
     var OTT = (function() {
         var executed = false;
         return function() {
@@ -43,7 +49,10 @@
                 document.getElementById("hangngang5").style.visibility = 'visible';
             }
         };
+    
     })();
+    function showgoc(){
+    }
     //xử lý số kí tự CNV
     for(i=0; i<5; i++){
         sokitu[i] = ansRow[i].split(" ").join("").length;
@@ -63,7 +72,7 @@
             document.getElementById("textboxid").value = "";
             answer = answer.toUpperCase();
             document.getElementById("saveAns").innerHTML = answer;
-            saveAns[0] = answer;
+            saveAns[0] = answer.replace(/\s+/g,' ').trim();
         }
     }
     function timing(){
@@ -86,11 +95,12 @@
     }
     function checkAnsCNV(){
         clearTimeout(timeoutID9);
-        mainTime1.pause();
+        //clearInterval(IntervalID);
+        if(saveAns[0] != " ") mainTime1.pause();
         checkCNV = 1;
         document.getElementById("timeQ").innerHTML = "";
         if (saveAns[0] == CNV[0]||saveAns[0] == CNV[1]){
-            //rightObs.play();
+            rightObs.play();
             document.getElementById("question").innerHTML = "Chúc mừng bạn đã vượt qua vòng thi Vượt Chướng Ngại Vật"
             document.getElementById("CNV").innerHTML = "CHƯỚNG NGẠI VẬT: "+ "<span style='color: green;'>"+CNV[0]+"</span>";
             showPicture();
@@ -106,7 +116,7 @@
             else{
                 wrongObs.play();
                 document.getElementById("CNV").innerHTML = "CHƯỚNG NGẠI VẬT: "+ "<span style='color: red;'>"+CNV[0]+"</span>";
-                if (saveAns[0] == ""){document.getElementById("question").innerHTML = "Bạn chưa đưa ra câu trả lời cho chướng ngại vật";}
+                if (saveAns[0] == " "|| saveAns[0] == ""){document.getElementById("question").innerHTML = "Bạn chưa đưa ra câu trả lời cho chướng ngại vật";}
                 else document.getElementById("question").innerHTML = "Bạn đã trả lời sai chướng ngại vật";
                 showPicture();
                 document.getElementById("HN1").innerHTML = ansRow[0];
@@ -121,13 +131,14 @@
     }
     function ansObs(){  
         checkCNV = 1;
+        checkBtn = 1;
         signalObs.play();
         document.getElementById("question").innerHTML = "Bạn đã ấn chuông xin trả lời chướng ngại vật";
         document.getElementById("status").innerHTML = "Chướng ngại vật";
         document.getElementById("sokitu").innerHTML = sokitu[5]+" kí tự ";
         document.getElementById("test").style.visibility = 'hidden';
         document.getElementById("timeQ").innerHTML = "";
-        
+        //clearTimeout(timeoutID10);
         IntervalID = setInterval(function(){
             clearTimeout(timeoutID1); mainTime.pause();
             clearTimeout(timeoutID2);
@@ -143,6 +154,7 @@
         setTimeout(function(){
             document.getElementById("question").innerHTML = "Hãy nhập CHƯỚNG NGẠI VẬT và ấn enter để trả lời. Bạn có 15 giây.";
             timing();
+            saveAns[0] = " ";
             mainTime1.play();
             document.getElementById("textboxid").addEventListener("keyup", getObstacle);
             timeoutID9 = setTimeout(function(){
@@ -154,17 +166,17 @@
     function getObstacle(){
         if(event.keyCode==13){
             //rickroll
-            var vid = document.getElementById("myVideo");
-            document.getElementById("myVideo").style.visibility = 'visible';
-            vid.autoplay = true;
-            vid.load();
+            //var vid = document.getElementById("myVideo");
+            //document.getElementById("myVideo").style.visibility = 'visible';
+            //vid.autoplay = true;
+            //vid.load();
             //
             document.getElementById("textboxid").removeEventListener("keyup", getObstacle);
             var answer = document.getElementById("textboxid").value;
             document.getElementById("textboxid").value = "";
             answer = answer.toUpperCase();
             document.getElementById("saveAns").innerHTML = answer;
-            saveAns[0] = answer;
+            saveAns[0] = answer.replace(/\s+/g,' ').trim();
             checkAnsCNV();
         }
     }
@@ -215,11 +227,11 @@
     }
     function ques(btn){
         saveAns[0]="";
-        var index = btn.name;
-        var sothutu = parseInt(index);
-        var HN = "HN"+sothutu;
-        var hangngang = "hangngang"+sothutu;
-        var goc = "goc"+sothutu;
+        index = btn.name;
+        sothutu = parseInt(index);
+        HN = "HN"+sothutu;
+        hangngang = "hangngang"+sothutu;
+        goc = "goc"+sothutu;
         document.getElementById("question").innerHTML = "";
         document.getElementById("status").innerHTML = "Hàng ngang số "+sothutu;
         if (btn.name == 5){document.getElementById("status").innerHTML = "Ô trung tâm"}
@@ -247,11 +259,13 @@
                         check[sothutu-1] = 1;
                         document.getElementById(HN).innerHTML = ansRow[sothutu-1];
                         document.getElementById(hangngang).style.color = "green";
-                        setTimeout(function(){
-                            pictureShow.play();
-                            document.getElementById(goc).style.visibility = "hidden";
-                        }, 6000)
-                    }
+                            setTimeout(function(){
+                                if (checkBtn == 0){
+                                pictureShow.play();
+                                document.getElementById(goc).style.visibility = "hidden";
+                                }
+                            }, 6000)
+                        }
                     else {
                         wrongRow.play();
                         document.getElementById(hangngang).style.color = "red";
